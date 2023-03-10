@@ -1,31 +1,52 @@
 {
-	"variables": [],
 	"info": {
+		"_postman_id": "e376410e-da88-42ba-aa26-16feac32136c",
 		"name": "Identity API v3.0",
-		"_postman_id": "2eb6764f-671b-e684-71d5-e431be70de41",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21019362"
 	},
 	"item": [
 		{
 			"name": "Authentication and token management",
-			"description": "/v3/auth",
 			"item": [
 				{
 					"name": "Password authentication with unscoped authorization",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var headerValue = pm.response.headers.get(\"X-Subject-Token\");\r",
+									"pm.environment.set(\"TOKEN\", headerValue)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"auth\": {\n        \"identity\": {\n            \"methods\": [\n                \"password\"\n            ],\n            \"password\": {\n                \"user\": {\n                    \"name\": \"{{OS_USERNAME}}\",\n                    \"domain\": {\n                        \"id\": \"default\"\n                    },\n                    \"password\": \"{{OS_PASSWORD}}\"\n                }\n            }\n        }\n    }\n}"
+							"raw": "{\n    \"auth\": {\n        \"identity\": {\n            \"methods\": [\n                \"password\"\n            ],\n            \"password\": {\n                \"user\": {\n                    \"name\": \"surya\",\n                    \"domain\": {\n                        \"id\": \"default\"\n                    },\n                    \"password\": \"asdfgf\"\n                }\n            }\n        }\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"auth",
+								"tokens"
+							]
 						},
 						"description": "/v3/auth/tokens"
 					},
@@ -34,18 +55,29 @@
 				{
 					"name": "Password authentication with scoped authorization",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"auth\": {\r\n        \"identity\": {\r\n            \"methods\": [\r\n                \"password\"\r\n            ],\r\n            \"password\": {\r\n                \"user\": {\r\n                    \"id\": \"{{OS_USERID}}\",\r\n                    \"password\": \"{{OS_PASSWORD}}\"\r\n                }\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"project\": {\r\n                \"id\": \"{{OS_TENANT_ID}}\"\r\n            }\r\n        }\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"auth",
+								"tokens"
+							]
 						},
 						"description": "/v3/auth/tokens"
 					},
@@ -54,18 +86,29 @@
 				{
 					"name": "Password authentication with explicit unscoped authorization",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n    \"auth\": {\n        \"identity\": {\n            \"methods\": [\n                \"password\"\n            ],\n            \"password\": {\n                \"user\": {\n                    \"id\": \"{{OS_USERID}}\",\n                    \"password\": \"{{OS_PASSWORD}}\"\n                }\n            }\n        },\n        \"scope\": \"unscoped\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"auth",
+								"tokens"
+							]
 						},
 						"description": "/v3/auth/tokens"
 					},
@@ -74,18 +117,29 @@
 				{
 					"name": "Token authentication with unscoped authorization",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"auth\": {\r\n        \"identity\": {\r\n            \"methods\": [\r\n                \"token\"\r\n            ],\r\n            \"token\": {\r\n                \"id\": \"{{TOKEN}}\"\r\n            }\r\n        }\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"auth",
+								"tokens"
+							]
 						},
 						"description": "/v3/auth/tokens"
 					},
@@ -94,18 +148,29 @@
 				{
 					"name": "Token authentication with scoped authorization",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"auth\": {\r\n        \"identity\": {\r\n            \"methods\": [\r\n                \"token\"\r\n            ],\r\n            \"token\": {\r\n                \"id\": \"{{TOKEN}}\"\r\n            }\r\n        },\r\n        \"scope\": {\r\n            \"project\": {\r\n                \"id\": \"{{OS_TENANT_ID}}\"\r\n            }\r\n        }\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"auth",
+								"tokens"
+							]
 						},
 						"description": "/v3/auth/tokens"
 					},
@@ -114,98 +179,123 @@
 				{
 					"name": "Validate and show information for token",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "X-Subject-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"description": ""
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"auth",
+								"tokens"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Check token",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "X-Subject-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
-						},
-						"description": ""
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"auth",
+								"tokens"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Revoke token",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "X-Subject-Token",
-								"value": "",
-								"description": ""
+								"value": ""
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
 						},
-						"description": ""
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/tokens",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"auth",
+								"tokens"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Get service catalog",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/catalog",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "X-Subject-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/catalog",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"auth",
+								"catalog"
+							]
 						},
 						"description": "/v3/auth/catalog"
 					},
@@ -214,23 +304,29 @@
 				{
 					"name": "Get available project scopes",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/projects",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "X-Subject-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"auth",
+								"projects"
+							]
 						},
 						"description": "/v3/auth/projects"
 					},
@@ -239,33 +335,39 @@
 				{
 					"name": "Get available domain scopes",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/domains",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "X-Subject-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/auth/domains",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"auth",
+								"domains"
+							]
 						},
 						"description": "/v3/auth/projects"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "/v3/auth"
 		},
 		{
 			"name": "Credentials",
-			"description": "/v3/credentials",
 			"item": [
 				{
 					"name": "Create credential (EC2)",
@@ -274,28 +376,50 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the requested access string\npostman.setEnvironmentVariable(\"access_str\", \"SETME\");\n\n// Set the requested secret key\npostman.setEnvironmentVariable(\"secret_key\", \"SETME\");\n\n// Set the Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\n// Set the User ID\npostman.setEnvironmentVariable(\"user_id\", \"{{OS_USERID}}\");\n"
+								"exec": [
+									"// Set the requested access string",
+									"postman.setEnvironmentVariable(\"access_str\", \"SETME\");",
+									"",
+									"// Set the requested secret key",
+									"postman.setEnvironmentVariable(\"secret_key\", \"SETME\");",
+									"",
+									"// Set the Tenant ID",
+									"postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");",
+									"",
+									"// Set the User ID",
+									"postman.setEnvironmentVariable(\"user_id\", \"{{OS_USERID}}\");",
+									""
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials",
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							},
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "    {\r\n    \"credential\": {\r\n        \"blob\": \"{\\\"access\\\":\\\"{{access_str}}\\\",\\\"secret\\\":\\\"{{secret_key}}\\\"}\",\r\n        \"project_id\": \"{{tenant_id}}\",\r\n        \"type\": \"ec2\",\r\n        \"user_id\": \"{{user_id}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"credentials"
+							]
 						},
 						"description": "/v3/credentials"
 					},
@@ -304,18 +428,24 @@
 				{
 					"name": "List credentials",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"credential\": {\r\n        \"blob\": \"{\\\"access\\\":\\\"{{access_str}}\\\",\\\"secret\\\":\\\"{{secret_key}}\\\"}\",\r\n        \"project_id\": \"{{OS_TENANT_ID}}\",\r\n        \"type\": \"ec2\",\r\n        \"user_id\": \"{{OS_USERID}}\"\r\n    }\r\n}"
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"credentials"
+							]
 						},
 						"description": "/v3/credentials"
 					},
@@ -328,23 +458,33 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Credentiaul UUID to lookup\npostman.setEnvironmentVariable(\"credential_id\", \"SETME\");"
+								"exec": [
+									"// Set Credentiaul UUID to lookup",
+									"postman.setEnvironmentVariable(\"credential_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials/{{credential_id}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"credential\": {\r\n        \"blob\": \"{\\\"access\\\":\\\"{{access_str}}\\\",\\\"secret\\\":\\\"{{secret_key}}\\\"}\",\r\n        \"project_id\": \"{{OS_TENANT_ID}}\",\r\n        \"type\": \"ec2\",\r\n        \"user_id\": \"{{OS_USERID}}\"\r\n    }\r\n}"
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials/{{credential_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"credentials",
+								"{{credential_id}}"
+							]
 						},
 						"description": "/v3/credentials/{credential_id}"
 					},
@@ -357,28 +497,53 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the Credential ID\npostman.setEnvironmentVariable(\"credential_id\", \"SETME\");\n\n// Set the requested access string\npostman.setEnvironmentVariable(\"access_str\", \"SETME\");\n\n// Set the requested secret key\npostman.setEnvironmentVariable(\"secret_key\", \"SETME\");\n\n// Set the Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\n// Set the User ID\npostman.setEnvironmentVariable(\"user_id\", \"{{OS_USERID}}\");"
+								"exec": [
+									"// Set the Credential ID",
+									"postman.setEnvironmentVariable(\"credential_id\", \"SETME\");",
+									"",
+									"// Set the requested access string",
+									"postman.setEnvironmentVariable(\"access_str\", \"SETME\");",
+									"",
+									"// Set the requested secret key",
+									"postman.setEnvironmentVariable(\"secret_key\", \"SETME\");",
+									"",
+									"// Set the Tenant ID",
+									"postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");",
+									"",
+									"// Set the User ID",
+									"postman.setEnvironmentVariable(\"user_id\", \"{{OS_USERID}}\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials/{{credential_id}}",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"credential\": {\r\n        \"blob\": \"{\\\"access\\\":\\\"{{access_str}}\\\",\\\"secret\\\":\\\"{{secret_key}}\\\"}\",\r\n        \"project_id\": \"{{tenant_id}}\",\r\n        \"type\": \"ec2\",\r\n        \"user_id\": \"{{user_id}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials/{{credential_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"credentials",
+								"{{credential_id}}"
+							]
 						},
 						"description": "/v3/credentials/{credential_id}"
 					},
@@ -391,49 +556,69 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Credentiaul UUID to lookup\npostman.setEnvironmentVariable(\"credential_id\", \"SETME\");"
+								"exec": [
+									"// Set Credentiaul UUID to lookup",
+									"postman.setEnvironmentVariable(\"credential_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials/{{credential_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": ""
 						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/credentials/{{credential_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"credentials",
+								"{{credential_id}}"
+							]
+						},
 						"description": "/v3/credentials/{credential_id}"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "/v3/credentials"
 		},
 		{
 			"name": "Domains",
-			"description": "/v3/domains",
 			"item": [
 				{
 					"name": "List domains",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains"
+							]
 						},
 						"description": "/v3/domains"
 					},
@@ -446,28 +631,47 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the Domain Description\n\npostman.setEnvironmentVariable(\"domain_description\", \"SETME\");\n\n// Enable or disable the domain\npostman.setEnvironmentVariable(\"domain_enabled\", true);\n\n// Set the Domain Name\npostman.setEnvironmentVariable(\"domain_name\", \"SETME\");"
+								"exec": [
+									"// Set the Domain Description",
+									"",
+									"postman.setEnvironmentVariable(\"domain_description\", \"SETME\");",
+									"",
+									"// Enable or disable the domain",
+									"postman.setEnvironmentVariable(\"domain_enabled\", true);",
+									"",
+									"// Set the Domain Name",
+									"postman.setEnvironmentVariable(\"domain_name\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains",
 						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"domain\": {\r\n        \"description\": \"{{domain_description}}\",\r\n        \"enabled\": {{domain_enabled}},\r\n        \"name\": \"{{domain_name}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains"
+							]
 						},
 						"description": "/v3/domains"
 					},
@@ -480,23 +684,33 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "\npostman.setEnvironmentVariable(\"domain_id\", \"SETME\");"
+								"exec": [
+									"",
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}"
+							]
 						},
 						"description": "/v3/domains/{domain_id}"
 					},
@@ -509,28 +723,50 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the Domain ID to update\npostman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\n// Set the Domain Description\npostman.setEnvironmentVariable(\"domain_description\", \"SETME\");\n\n// Enable or disable the domain\npostman.setEnvironmentVariable(\"domain_enabled\", true);\n\n// Set the Domain Name\npostman.setEnvironmentVariable(\"domain_name\", \"SETME\");"
+								"exec": [
+									"// Set the Domain ID to update",
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"// Set the Domain Description",
+									"postman.setEnvironmentVariable(\"domain_description\", \"SETME\");",
+									"",
+									"// Enable or disable the domain",
+									"postman.setEnvironmentVariable(\"domain_enabled\", true);",
+									"",
+									"// Set the Domain Name",
+									"postman.setEnvironmentVariable(\"domain_name\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"domain\": {\r\n        \"description\": \"{{domain_description}}\",\r\n        \"enabled\": {{domain_enabled}},\r\n        \"name\": \"{{domain_name}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}"
+							]
 						},
 						"description": "/v3/domains/{domain_id}"
 					},
@@ -543,49 +779,71 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Domain ID\npostman.setEnvironmentVariable(\"domain_id\", \"SETME\");"
+								"exec": [
+									"// Set Domain ID",
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
 						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}"
+							]
+						},
 						"description": "/v3/domains/{domain_id}"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "/v3/domains"
 		},
 		{
 			"name": "Domains configuration",
-			"description": "/v3/domains/config",
 			"item": [
 				{
 					"name": "Show default configuration settings  detail",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/config/default",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/config/default",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"config",
+								"default"
+							]
 						},
 						"description": "/v3/domains/config/default"
 					},
@@ -598,23 +856,35 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the Group ID\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								"exec": [
+									"// Set the Group ID",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/config/{{group_id}}/default",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/config/{{group_id}}/default",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"config",
+								"{{group_id}}",
+								"default"
+							]
 						},
 						"description": "/v3/domains/config/{group}/default"
 					},
@@ -627,23 +897,39 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the Group ID\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\n// Set the Option\npostman.setEnvironmentVariable(\"option\", \"SETME\");"
+								"exec": [
+									"// Set the Group ID",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"// Set the Option",
+									"postman.setEnvironmentVariable(\"option\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/config/{{groupid}}/{{option}}/default",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/config/{{groupid}}/{{option}}/default",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"config",
+								"{{groupid}}",
+								"{{option}}",
+								"default"
+							]
 						},
 						"description": "/v3/domains/config/{group}/{option}/default"
 					},
@@ -656,23 +942,44 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the Domain ID\npostman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\n// Set the Group ID\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\n// Set the Option\npostman.setEnvironmentVariable(\"option\", \"SETME\");\n\n"
+								"exec": [
+									"// Set the Domain ID",
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");",
+									"",
+									"// Set the Group ID",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"// Set the Option",
+									"postman.setEnvironmentVariable(\"option\", \"SETME\");",
+									"",
+									""
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}/{{option}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}/{{option}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}",
+								"config",
+								"{{group_id}}",
+								"{{option}}"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/config/{group}/{option}"
 					},
@@ -685,28 +992,53 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"option\", \"SETME\");\n\npostman.setEnvironmentVariable(\"identity_driver\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_url\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_user_tree_dn\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"option\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"identity_driver\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"ldap_url\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"ldap_user_tree_dn\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}/{{option}}",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"config\": {\r\n        \"identity\": {\r\n            \"driver\": \"{{identity_driver}}\"\r\n        },\r\n        \"ldap\": {\r\n            \"url\": \"{{ldap_url}}\",\r\n            \"user_tree_dn\": \"{{ldap_user_tree_dn}}\"\r\n        }\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}/{{option}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}",
+								"config",
+								"{{group_id}}",
+								"{{option}}"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/config/{group}/{option}"
 					},
@@ -719,23 +1051,43 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"option\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"option\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}/{{option}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}/{{option}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}",
+								"config",
+								"{{group_id}}",
+								"{{option}}"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/config/{group}/{option}"
 					},
@@ -748,23 +1100,36 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}",
+								"config",
+								"{{group_id}}"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/config/{group}"
 					},
@@ -777,28 +1142,50 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"identity_driver\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_url\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_user_tree_dn\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"identity_driver\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"ldap_url\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"ldap_user_tree_dn\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"config\": {\r\n        \"identity\": {\r\n            \"driver\": \"{{identity_driver}}\"\r\n        },\r\n        \"ldap\": {\r\n            \"url\": \"{{ldap_url}}\",\r\n            \"user_tree_dn\": \"{{ldap_user_tree_dn}}\"\r\n        }\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}",
+								"config",
+								"{{group_id}}"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/config/{group}"
 					},
@@ -811,23 +1198,40 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config/{{group_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}",
+								"config",
+								"{{group_id}}"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/config/{group}"
 					},
@@ -840,28 +1244,47 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"identity_driver\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_url\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_user_tree_dn\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");",
+									"",
+									"postman.setEnvironmentVariable(\"identity_driver\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"ldap_url\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"ldap_user_tree_dn\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"config\": {\r\n        \"identity\": {\r\n            \"driver\": \"{{identity_driver}}\"\r\n        },\r\n        \"ldap\": {\r\n            \"url\": \"{{ldap_url}}\",\r\n            \"user_tree_dn\": \"{{ldap_user_tree_dn}}\"\r\n        }\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}",
+								"config"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/config"
 					},
@@ -874,23 +1297,33 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"config\": {\r\n        \"identity\": {\r\n            \"driver\": \"{{identity_driver}}\"\r\n        },\r\n        \"ldap\": {\r\n            \"url\": \"{{ldap_url}}\",\r\n            \"user_tree_dn\": \"{{ldap_user_tree_dn}}\"\r\n        }\r\n    }\r\n}"
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}",
+								"config"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/config"
 					},
@@ -903,28 +1336,47 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\npostman.setEnvironmentVariable(\"identity_driver\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_url\", \"SETME\");\n\npostman.setEnvironmentVariable(\"ldap_user_tree_dn\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");",
+									"",
+									"postman.setEnvironmentVariable(\"identity_driver\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"ldap_url\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"ldap_user_tree_dn\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"config\": {\r\n        \"identity\": {\r\n            \"driver\": \"{{identity_driver}}\"\r\n        },\r\n        \"ldap\": {\r\n            \"url\": \"{{ldap_url}}\",\r\n            \"user_tree_dn\": \"{{ldap_user_tree_dn}}\"\r\n        }\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}",
+								"config"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/config"
 					},
@@ -937,33 +1389,47 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
 						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domains/{{domain_id}}/config",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domains",
+								"{{domain_id}}",
+								"config"
+							]
+						},
 						"description": "/v3/domains/{domain_id}/config"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "/v3/domains/config"
 		},
 		{
 			"name": "Groups",
-			"description": "/v3/groups",
 			"item": [
 				{
 					"name": "Show group details",
@@ -972,23 +1438,32 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"groups",
+								"{{group_id}}"
+							]
 						},
 						"description": "/v3/groups/{group_id}"
 					},
@@ -1001,28 +1476,50 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Group ID\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\n// Set Group Name\npostman.setEnvironmentVariable(\"group_name\", \"SETME\");\n\n// Set Group Description\npostman.setEnvironmentVariable(\"group_description\", \"SETME\");\n\n// Set Domain ID\npostman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");"
+								"exec": [
+									"// Set Group ID",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"// Set Group Name",
+									"postman.setEnvironmentVariable(\"group_name\", \"SETME\");",
+									"",
+									"// Set Group Description",
+									"postman.setEnvironmentVariable(\"group_description\", \"SETME\");",
+									"",
+									"// Set Domain ID",
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"group\": {\r\n        \"description\": \"{{group_description}}\",\r\n        \"domain_id\": \"{{domain_id}}\",\r\n        \"name\": \"{{group_name}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"groups",
+								"{{group_id}}"
+							]
 						},
 						"description": "/v3/groups/{group_id}"
 					},
@@ -1035,23 +1532,37 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Group ID\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								"exec": [
+									"// Set Group ID",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"groups",
+								"{{group_id}}"
+							]
 						},
 						"description": "/v3/groups/{group_id}"
 					},
@@ -1064,23 +1575,42 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Group ID\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\n// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								"exec": [
+									"// Set Group ID",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"// Set User ID",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}/users/{{user_id}}",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}/users/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"groups",
+								"{{group_id}}",
+								"users",
+								"{{user_id}}"
+							]
 						},
 						"description": "/v3/groups/{group_id}/users/{user_id}"
 					},
@@ -1093,23 +1623,42 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Group ID\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\n// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								"exec": [
+									"// Set Group ID",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"// Set User ID",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}/users/{{user_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}/users/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"groups",
+								"{{group_id}}",
+								"users",
+								"{{user_id}}"
+							]
 						},
 						"description": "/v3/groups/{group_id}/users/{user_id}"
 					},
@@ -1122,23 +1671,38 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Group ID\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\n// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								"exec": [
+									"// Set Group ID",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"// Set User ID",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}/users/{{user_id}}",
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}/users/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"groups",
+								"{{group_id}}",
+								"users",
+								"{{user_id}}"
+							]
 						},
 						"description": "/v3/groups/{group_id}/users/{user_id}"
 					},
@@ -1151,23 +1715,34 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Group ID\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								"exec": [
+									"// Set Group ID",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}/users",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups/{{group_id}}/users",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"groups",
+								"{{group_id}}",
+								"users"
+							]
 						},
 						"description": "/v3/groups/{group_id}/users"
 					},
@@ -1180,28 +1755,46 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Group Name\npostman.setEnvironmentVariable(\"group_name\", \"SETME\");\n\n// Set Group Description\npostman.setEnvironmentVariable(\"group_description\", \"SETME\");\n\n// Set Domain ID\npostman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");"
+								"exec": [
+									"// Set Group Name",
+									"postman.setEnvironmentVariable(\"group_name\", \"SETME\");",
+									"",
+									"// Set Group Description",
+									"postman.setEnvironmentVariable(\"group_description\", \"SETME\");",
+									"",
+									"// Set Domain ID",
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups",
 						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"group\": {\r\n        \"description\": \"{{group_description}}\",\r\n        \"domain_id\": \"{{domain_id}}\",\r\n        \"name\": \"{{group_name}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"groups"
+							]
 						},
 						"description": "/v3/groups"
 					},
@@ -1210,28 +1803,34 @@
 				{
 					"name": "List groups",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/groups",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"groups"
+							]
 						},
 						"description": "/v3/groups"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "/v3/groups"
 		},
 		{
 			"name": "OS-INHERIT API",
-			"description": "/v3/OS-",
 			"item": [
 				{
 					"name": "Assign role to user on projects owned by domain [Check]",
@@ -1240,23 +1839,46 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"domains",
+								"{{domain_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"{{role_id}}",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/domains/{domain_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"
 					},
@@ -1269,23 +1891,46 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"domains",
+								"{{domain_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"{{role_id}}",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"
 					},
@@ -1298,23 +1943,39 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/users/{{user_id}}/roles/inherited_to_projects",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/users/{{user_id}}/roles/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"domains",
+								"{{domain_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/domains/{domain_id}/users/{user_id}/roles/inherited_to_projects"
 					},
@@ -1327,23 +1988,39 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/groups/{{group_id}}/roles/inherited_to_projects",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/groups/{{group_id}}/roles/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"domains",
+								"{{domain_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/inherited_to_projects"
 					},
@@ -1356,23 +2033,42 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"domains",
+								"{{domain_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"{{role_id}}",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/domains/{domain_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"
 					},
@@ -1385,23 +2081,42 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"domains",
+								"{{domain_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"{{role_id}}",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"
 					},
@@ -1414,23 +2129,46 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"domains",
+								"{{domain_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"{{role_id}}",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/domains/{domain_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"
 					},
@@ -1443,23 +2181,46 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/domains/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"domains",
+								"{{domain_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"{{role_id}}",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/domains/{domain_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"
 					},
@@ -1472,23 +2233,46 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"projects",
+								"{{project_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"{{role_id}}",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/projects/{project_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"
 					},
@@ -1501,23 +2285,46 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"projects",
+								"{{project_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"{{role_id}}",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/projects/{project_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"
 					},
@@ -1530,23 +2337,39 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/users/{{user_id}}/roles/inherited_to_projects",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/users/{{user_id}}/roles/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"projects",
+								"{{project_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/projects/{project_id}/users/{user_id}/roles/inherited_to_projects"
 					},
@@ -1559,23 +2382,39 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/groups/{{group_id}}/roles/inherited_to_projects",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/groups/{{group_id}}/roles/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"projects",
+								"{{project_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/projects/{project_id}/groups/{group_id}/roles/inherited_to_projects"
 					},
@@ -1588,23 +2427,42 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"projects",
+								"{{project_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"{{role_id}}",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/projects/{project_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"
 					},
@@ -1617,23 +2475,42 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"projects",
+								"{{project_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"{{role_id}}",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/projects/{project_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"
 					},
@@ -1646,23 +2523,46 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"projects",
+								"{{project_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"{{role_id}}",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/projects/{project_id}/users/{user_id}/roles/{role_id}/inherited_to_projects"
 					},
@@ -1675,23 +2575,46 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/OS-INHERIT/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}/inherited_to_projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"OS-INHERIT",
+								"projects",
+								"{{project_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"{{role_id}}",
+								"inherited_to_projects"
+							]
 						},
 						"description": "/v3/OS-INHERIT/projects/{project_id}/groups/{group_id}/roles/{role_id}/inherited_to_projects"
 					},
@@ -1700,28 +2623,34 @@
 				{
 					"name": "List effective role assignments",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/role_assignments",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/role_assignments",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"role_assignments"
+							]
 						},
 						"description": "/v3/role_assignments"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "/v3/OS-"
 		},
 		{
 			"name": "Policies",
-			"description": "/v3/policies",
 			"item": [
 				{
 					"name": "Create policy",
@@ -1730,28 +2659,47 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Rule Blob\n// EXAMPLE: {'foobar_user': 'role:compute-user'}\npostman.setEnvironmentVariable(\"rule_blob\", \"{'SETME': 'SETME'}\");\n\n// Set Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\n// Set Owner User ID\npostman.setEnvironmentVariable(\"owner_user_id\", \"{{OS_USERID}}\");"
+								"exec": [
+									"// Set Rule Blob",
+									"// EXAMPLE: {'foobar_user': 'role:compute-user'}",
+									"postman.setEnvironmentVariable(\"rule_blob\", \"{'SETME': 'SETME'}\");",
+									"",
+									"// Set Tenant ID",
+									"postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");",
+									"",
+									"// Set Owner User ID",
+									"postman.setEnvironmentVariable(\"owner_user_id\", \"{{OS_USERID}}\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies",
 						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"policy\": {\r\n        \"blob\": \"{{rule_blob}}\",\r\n        \"project_id\": \"{{tenant_id}}\",\r\n        \"type\": \"application/json\",\r\n        \"user_id\": \"{{owner_user_id}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"policies"
+							]
 						},
 						"description": "/v3/policies"
 					},
@@ -1760,18 +2708,24 @@
 				{
 					"name": "List policies",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"policies"
+							]
 						},
 						"description": "/v3/policies"
 					},
@@ -1784,23 +2738,34 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Policy ID\npostman.setEnvironmentVariable(\"policy_id\", \"SETME\");\n"
+								"exec": [
+									"// Set Policy ID",
+									"postman.setEnvironmentVariable(\"policy_id\", \"SETME\");",
+									""
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"policies",
+								"{{policy_id}}"
+							]
 						},
 						"description": "/v3/policies/{policy_id}"
 					},
@@ -1813,28 +2778,51 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Policy ID\npostman.setEnvironmentVariable(\"policy_id\", \"455742d015e64bb086e2e3ba66580a98\");\n\n// Set Rule Blobs\n// EXAMPLE: {'foobar_user': 'role:compute-user'}\npostman.setEnvironmentVariable(\"rule_blob\", \"{'kalen_user': 'role:compute-user'}\");\n\n// Set Tenant ID\npostman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");\n\n// Set Owner User ID\npostman.setEnvironmentVariable(\"owner_user_id\", \"{{OS_USERID}}\");"
+								"exec": [
+									"// Set Policy ID",
+									"postman.setEnvironmentVariable(\"policy_id\", \"455742d015e64bb086e2e3ba66580a98\");",
+									"",
+									"// Set Rule Blobs",
+									"// EXAMPLE: {'foobar_user': 'role:compute-user'}",
+									"postman.setEnvironmentVariable(\"rule_blob\", \"{'kalen_user': 'role:compute-user'}\");",
+									"",
+									"// Set Tenant ID",
+									"postman.setEnvironmentVariable(\"tenant_id\", \"{{OS_TENANT_ID}}\");",
+									"",
+									"// Set Owner User ID",
+									"postman.setEnvironmentVariable(\"owner_user_id\", \"{{OS_USERID}}\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"policy\": {\r\n        \"blob\": {{rule_blob}},\r\n        \"project_id\": \"{{tenant_id}}\",\r\n        \"type\": \"application/json\",\r\n        \"user_id\": \"{{owner_user_id}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"policies",
+								"{{policy_id}}"
+							]
 						},
 						"description": "/v3/policies/{policy_id}"
 					},
@@ -1847,49 +2835,70 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Policy ID\npostman.setEnvironmentVariable(\"policy_id\", \"SETME\");\n"
+								"exec": [
+									"// Set Policy ID",
+									"postman.setEnvironmentVariable(\"policy_id\", \"SETME\");",
+									""
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
 						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/policies/{{policy_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"policies",
+								"{{policy_id}}"
+							]
+						},
 						"description": "/v3/policies/{policy_id}"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "/v3/policies"
 		},
 		{
 			"name": "Projects",
-			"description": "/v3/projects",
 			"item": [
 				{
 					"name": "List Projects",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects"
+							]
 						},
 						"description": "/v3/projects"
 					},
@@ -1902,28 +2911,46 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Project Name\npostman.setEnvironmentVariable(\"project_name\", \"SETME\");\n\n// Set Project Description\npostman.setEnvironmentVariable(\"project_description\", \"SETME\");\n\n// Set Domain ID\npostman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");"
+								"exec": [
+									"// Set Project Name",
+									"postman.setEnvironmentVariable(\"project_name\", \"SETME\");",
+									"",
+									"// Set Project Description",
+									"postman.setEnvironmentVariable(\"project_description\", \"SETME\");",
+									"",
+									"// Set Domain ID",
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects",
 						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"project\": {\r\n        \"description\": \"{{project_description}}\",\r\n        \"domain_id\": \"{{domain_id}}\",\r\n        \"enabled\": true,\r\n        \"is_domain\": false,\r\n        \"name\": \"{{project_name}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects"
+							]
 						},
 						"description": "/v3/projects"
 					},
@@ -1936,28 +2963,43 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Project Name\npostman.setEnvironmentVariable(\"project_name\", \"SETME\");\n\n// Set Project Description\npostman.setEnvironmentVariable(\"project_description\", \"SETME\");"
+								"exec": [
+									"// Set Project Name",
+									"postman.setEnvironmentVariable(\"project_name\", \"SETME\");",
+									"",
+									"// Set Project Description",
+									"postman.setEnvironmentVariable(\"project_description\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects",
 						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"project\": {\r\n        \"description\": \"{{project_description}}\",\r\n        \"enabled\": true,\r\n        \"is_domain\": true,\r\n        \"name\": \"{{project_name}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects"
+							]
 						},
 						"description": "/v3/projects"
 					},
@@ -1970,23 +3012,34 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Project ID\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");\n"
+								"exec": [
+									"// Set Project ID",
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									""
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}"
+							]
 						},
 						"description": "/v3/projects/{project_id}"
 					},
@@ -1999,28 +3052,50 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Project ID\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\n// Set Project Name\npostman.setEnvironmentVariable(\"project_name\", \"SETME\");\n\n// Set Project Description\npostman.setEnvironmentVariable(\"project_description\", \"SETME\");\n\n// Set Project Emabled\npostman.setEnvironmentVariable(\"project_enabled\", true);"
+								"exec": [
+									"// Set Project ID",
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"// Set Project Name",
+									"postman.setEnvironmentVariable(\"project_name\", \"SETME\");",
+									"",
+									"// Set Project Description",
+									"postman.setEnvironmentVariable(\"project_description\", \"SETME\");",
+									"",
+									"// Set Project Emabled",
+									"postman.setEnvironmentVariable(\"project_enabled\", true);"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"project\": {\r\n        \"description\": \"{{project_description}}\",\r\n        \"enabled\": {{project_enabled}},\r\n        \"name\": \"{{project_name}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}"
+							]
 						},
 						"description": "/v3/projects/{project_id}"
 					},
@@ -2033,23 +3108,37 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Project ID\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");"
+								"exec": [
+									"// Set Project ID",
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}"
+							]
 						},
 						"description": "/v3/projects/{project_id}"
 					},
@@ -2062,28 +3151,45 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Project ID\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\n// Set Project Emabled\npostman.setEnvironmentVariable(\"project_enabled\", true);"
+								"exec": [
+									"// Set Project ID",
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"// Set Project Emabled",
+									"postman.setEnvironmentVariable(\"project_enabled\", true);"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/cascade",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"project\": {\r\n        \"enabled\": {{project_enabled}}\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/cascade",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}",
+								"cascade"
+							]
 						},
 						"description": "/v3/projects/{project_id}/cascade"
 					},
@@ -2096,33 +3202,48 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Project ID\npostman.setEnvironmentVariable(\"project_id\", \"SETME\");"
+								"exec": [
+									"// Set Project ID",
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/cascade",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
 						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/cascade",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}",
+								"cascade"
+							]
+						},
 						"description": "/v3/projects/{project_id}/cascade"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "/v3/projects"
 		},
 		{
 			"name": "Regions",
-			"description": "/v3/regions",
 			"item": [
 				{
 					"name": "Show region details",
@@ -2131,23 +3252,33 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Region ID\npostman.setEnvironmentVariable(\"region_id\", \"kalen\");"
+								"exec": [
+									"// Set Region ID",
+									"postman.setEnvironmentVariable(\"region_id\", \"kalen\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions/{{region_id}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions/{{region_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"regions",
+								"{{region_id}}"
+							]
 						},
 						"description": "/v3/regions/{region_id}"
 					},
@@ -2160,28 +3291,47 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Region ID\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");\n\n// Set Region Description\npostman.setEnvironmentVariable(\"region_description\", \"SETME\");\n\n// Set Region Parent\npostman.setEnvironmentVariable(\"region_parent_id\", \"RegionOne\");"
+								"exec": [
+									"// Set Region ID",
+									"postman.setEnvironmentVariable(\"region_id\", \"SETME\");",
+									"",
+									"// Set Region Description",
+									"postman.setEnvironmentVariable(\"region_description\", \"SETME\");",
+									"",
+									"// Set Region Parent",
+									"postman.setEnvironmentVariable(\"region_parent_id\", \"RegionOne\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions/{{region_id}}",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"region\": {\r\n        \"description\": \"{{region_description}}\",\r\n        \"parent_region_id\": \"{{region_parent_id}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions/{{region_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"regions",
+								"{{region_id}}"
+							]
 						},
 						"description": "/v3/regions/{region_id}"
 					},
@@ -2194,23 +3344,37 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Region ID\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");"
+								"exec": [
+									"// Set Region ID",
+									"postman.setEnvironmentVariable(\"region_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions/{{region_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions/{{region_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"regions",
+								"{{region_id}}"
+							]
 						},
 						"description": "/v3/regions/{region_id}"
 					},
@@ -2219,18 +3383,24 @@
 				{
 					"name": "List Regions",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"regions"
+							]
 						},
 						"description": "/v3/regions"
 					},
@@ -2243,38 +3413,56 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Region ID\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");\n\n// Set Region Description\npostman.setEnvironmentVariable(\"region_description\", \"SETME\");\n\n// Set Region Parent\npostman.setEnvironmentVariable(\"region_parent_id\", \"RegionOne\");"
+								"exec": [
+									"// Set Region ID",
+									"postman.setEnvironmentVariable(\"region_id\", \"SETME\");",
+									"",
+									"// Set Region Description",
+									"postman.setEnvironmentVariable(\"region_description\", \"SETME\");",
+									"",
+									"// Set Region Parent",
+									"postman.setEnvironmentVariable(\"region_parent_id\", \"RegionOne\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions",
 						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"region\": {\r\n        \"description\": \"{{region_description}}\",\r\n        \"id\": \"{{region_id}}\",\r\n        \"parent_region_id\": \"{{region_parent_id}}\"\r\n    }\r\n}"
 						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/regions",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"regions"
+							]
+						},
 						"description": "/v3/regions"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "/v3/regions"
 		},
 		{
 			"name": "Roles",
-			"description": "",
 			"item": [
 				{
 					"name": "Assign role to group on project [Check]",
@@ -2283,23 +3471,44 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/projects/{project_id}/groups/{group_id}/roles/{role_id}"
 					},
@@ -2312,23 +3521,40 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}",
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/projects/{project_id}/groups/{group_id}/roles/{role_id}"
 					},
@@ -2341,23 +3567,44 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/groups/{{group_id}}/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/projects/{project_id}/groups/{group_id}/roles/{role_id}"
 					},
@@ -2370,23 +3617,44 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/projects/{project_id}/users/{user_id}/roles/{role_id}"
 					},
@@ -2399,23 +3667,40 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}",
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/projects/{project_id}/users/{user_id}/roles/{role_id}"
 					},
@@ -2428,23 +3713,44 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/users/{{user_id}}/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/projects/{project_id}/users/{user_id}/roles/{role_id}"
 					},
@@ -2457,23 +3763,37 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/users/{{user_id}}/roles",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/users/{{user_id}}/roles",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}",
+								"users",
+								"{{user_id}}",
+								"roles"
+							]
 						},
 						"description": "/v3/projects/{project_id}/users/{user_id}/roles"
 					},
@@ -2486,23 +3806,37 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"project_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"project_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/groups/{{group_id}}/roles",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{project_id}}/groups/{{group_id}}/roles",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{project_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles"
+							]
 						},
 						"description": "/v3/projects/{project_id}/groups/{group_id}/roles"
 					},
@@ -2515,23 +3849,44 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{domain_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/projects/{project_id}/groups/{group_id}/roles/{role_id}"
 					},
@@ -2544,23 +3899,40 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}",
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{domain_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/projects/{project_id}/groups/{group_id}/roles/{role_id}"
 					},
@@ -2573,23 +3945,44 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{domain_id}}/groups/{{group_id}}/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{domain_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/projects/{project_id}/groups/{group_id}/roles/{role_id}"
 					},
@@ -2602,23 +3995,37 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{domain_id}}/users/{{user_id}}/roles",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{domain_id}}/users/{{user_id}}/roles",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{domain_id}}",
+								"users",
+								"{{user_id}}",
+								"roles"
+							]
 						},
 						"description": "/v3/projects/{domain_id}/users/{user_id}/roles"
 					},
@@ -2627,18 +4034,24 @@
 				{
 					"name": "List Roles [Check]",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"roles"
+							]
 						},
 						"description": "/v3/roles"
 					},
@@ -2651,28 +4064,41 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_name\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_name\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles",
 						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"role\": {\r\n        \"domain_id\": \"{{domain_id}}\",\r\n        \"name\": \"{{role_name}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"roles"
+							]
 						},
 						"description": "/v3/roles"
 					},
@@ -2685,23 +4111,44 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_name\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_name\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domain/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domain/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domain",
+								"{{domain_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/users/{user_id}/roles/{role_id}"
 					},
@@ -2714,23 +4161,40 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_name\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_name\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domain/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}",
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domain/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domain",
+								"{{domain_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/users/{user_id}/roles/{role_id}"
 					},
@@ -2743,23 +4207,44 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_name\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_name\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domain/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/domain/{{domain_id}}/users/{{user_id}}/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"domain",
+								"{{domain_id}}",
+								"users",
+								"{{user_id}}",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/users/{user_id}/roles/{role_id}"
 					},
@@ -2772,23 +4257,37 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"domain_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"domain_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"group_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{domain_id}}/groups/{{group_id}}/roles",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/projects/{{domain_id}}/groups/{{group_id}}/roles",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"projects",
+								"{{domain_id}}",
+								"groups",
+								"{{group_id}}",
+								"roles"
+							]
 						},
 						"description": "/v3/domains/{domain_id}/groups/{group_id}/roles"
 					},
@@ -2797,18 +4296,24 @@
 				{
 					"name": "List role assignments",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/role_assignments",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/role_assignments",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"role_assignments"
+							]
 						},
 						"description": "/v3/role_assignments"
 					},
@@ -2821,23 +4326,32 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{role_id}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/roles/{role_id}"
 					},
@@ -2850,28 +4364,42 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"role_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"role_name\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"role_name\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{role_id}}",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"role\": {\r\n        \"name\": \"{{role_name}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/roles/{role_id}"
 					},
@@ -2884,23 +4412,36 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{role_id}}",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"roles",
+								"{{role_id}}"
+							]
 						},
 						"description": "/v3/roles/{role_id}"
 					},
@@ -2913,23 +4454,33 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"prior_role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"prior_role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{prior_role_id}}/implies",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{prior_role_id}}/implies",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"roles",
+								"{{prior_role_id}}",
+								"implies"
+							]
 						},
 						"description": "/v3/roles/{prior_role_id}/implies"
 					},
@@ -2942,23 +4493,40 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"prior_role_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"implies_role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"prior_role_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"implies_role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{prior_role_id}}/implies/{{implies_role_id}}",
 						"method": "PUT",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{prior_role_id}}/implies/{{implies_role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"roles",
+								"{{prior_role_id}}",
+								"implies",
+								"{{implies_role_id}}"
+							]
 						},
 						"description": "/v3/roles/{prior_role_id}/implies/{implies_role_id}"
 					},
@@ -2971,23 +4539,36 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"prior_role_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"implies_role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"prior_role_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"implies_role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{prior_role_id}}/implies/{{implies_role_id}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{prior_role_id}}/implies/{{implies_role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"roles",
+								"{{prior_role_id}}",
+								"implies",
+								"{{implies_role_id}}"
+							]
 						},
 						"description": "/v3/roles/{prior_role_id}/implies/{implies_role_id}"
 					},
@@ -3000,23 +4581,36 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"prior_role_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"implies_role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"prior_role_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"implies_role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{prior_role_id}}/implies/{{implies_role_id}}",
 						"method": "HEAD",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{prior_role_id}}/implies/{{implies_role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"roles",
+								"{{prior_role_id}}",
+								"implies",
+								"{{implies_role_id}}"
+							]
 						},
 						"description": "/v3/roles/{prior_role_id}/implies/{implies_role_id}"
 					},
@@ -3029,23 +4623,40 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "postman.setEnvironmentVariable(\"prior_role_id\", \"SETME\");\n\npostman.setEnvironmentVariable(\"implies_role_id\", \"SETME\");"
+								"exec": [
+									"postman.setEnvironmentVariable(\"prior_role_id\", \"SETME\");",
+									"",
+									"postman.setEnvironmentVariable(\"implies_role_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{prior_role_id}}/implies/{{implies_role_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/roles/{{prior_role_id}}/implies/{{implies_role_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"roles",
+								"{{prior_role_id}}",
+								"implies",
+								"{{implies_role_id}}"
+							]
 						},
 						"description": "/v3/roles/{prior_role_id}/implies/{implies_role_id}"
 					},
@@ -3054,18 +4665,24 @@
 				{
 					"name": "List all role inference rules",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/role_inferences",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/role_inferences",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"role_inferences"
+							]
 						},
 						"description": "/v3/role_inferences"
 					},
@@ -3075,23 +4692,28 @@
 		},
 		{
 			"name": "Service catalog and endpoints",
-			"description": "",
 			"item": [
 				{
 					"name": "List services",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"services"
+							]
 						},
 						"description": "/v3/services"
 					},
@@ -3104,28 +4726,46 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set Service Type\npostman.setEnvironmentVariable(\"service_type\", \"SETME\");\n\n// Set Service Name\npostman.setEnvironmentVariable(\"service_name\", \"SETME\");\n\n// Set Service Description\npostman.setEnvironmentVariable(\"service_description\", \"SETME\");"
+								"exec": [
+									"// Set Service Type",
+									"postman.setEnvironmentVariable(\"service_type\", \"SETME\");",
+									"",
+									"// Set Service Name",
+									"postman.setEnvironmentVariable(\"service_name\", \"SETME\");",
+									"",
+									"// Set Service Description",
+									"postman.setEnvironmentVariable(\"service_description\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services",
 						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"service\": {\r\n        \"type\": \"{{service_type}}\",\r\n        \"name\": \"{{service_name}}\",\r\n        \"description\": \"{{service_description}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"services"
+							]
 						},
 						"description": "/v3/services"
 					},
@@ -3138,23 +4778,33 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the Endpoint ID\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+								"exec": [
+									"// Set the Endpoint ID",
+									"postman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints/{{endpoint_id}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints/{{endpoint_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"endpoints",
+								"{{endpoint_id}}"
+							]
 						},
 						"description": "/v3/endpoints/{endpoint_id"
 					},
@@ -3167,28 +4817,53 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the Endpoint ID\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");\n\n// Set the Interface\npostman.setEnvironmentVariable(\"endpoint_interface\", \"SETME\");\n\n// Set the RegionID\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");\n\n// Set the Enpoint URL\npostman.setEnvironmentVariable(\"endpoint_url\", \"SETME\");\n\n// Set the Service ID\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+								"exec": [
+									"// Set the Endpoint ID",
+									"postman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");",
+									"",
+									"// Set the Interface",
+									"postman.setEnvironmentVariable(\"endpoint_interface\", \"SETME\");",
+									"",
+									"// Set the RegionID",
+									"postman.setEnvironmentVariable(\"region_id\", \"SETME\");",
+									"",
+									"// Set the Enpoint URL",
+									"postman.setEnvironmentVariable(\"endpoint_url\", \"SETME\");",
+									"",
+									"// Set the Service ID",
+									"postman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints/{{endpoint_id}}",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"endpoint\": {\r\n        \"interface\": \"{{endpoint_interface}}\",\r\n        \"region_id\": \"{{region_id}}\",\r\n        \"url\": \"{{endpoint_url}}\",\r\n        \"service_id\": \"{{service_id}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints/{{endpoint_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"endpoints",
+								"{{endpoint_id}}"
+							]
 						},
 						"description": "/v3/endpoints/{endpoint_id}"
 					},
@@ -3201,23 +4876,37 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the Endpoint ID\npostman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+								"exec": [
+									"// Set the Endpoint ID",
+									"postman.setEnvironmentVariable(\"endpoint_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints/{{endpoint_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints/{{endpoint_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"endpoints",
+								"{{endpoint_id}}"
+							]
 						},
 						"description": "/v3/endpoints/{endpoint_id}"
 					},
@@ -3226,18 +4915,24 @@
 				{
 					"name": "List endpoints",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"endpoints"
+							]
 						},
 						"description": "/v3/endpoints"
 					},
@@ -3250,28 +4945,49 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the Interface\npostman.setEnvironmentVariable(\"endpoint_interface\", \"SETME\");\n\n// Set the RegionID\npostman.setEnvironmentVariable(\"region_id\", \"SETME\");\n\n// Set the Enpoint URL\npostman.setEnvironmentVariable(\"endpoint_url\", \"SETME\");\n\n// Set the Service ID\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+								"exec": [
+									"// Set the Interface",
+									"postman.setEnvironmentVariable(\"endpoint_interface\", \"SETME\");",
+									"",
+									"// Set the RegionID",
+									"postman.setEnvironmentVariable(\"region_id\", \"SETME\");",
+									"",
+									"// Set the Enpoint URL",
+									"postman.setEnvironmentVariable(\"endpoint_url\", \"SETME\");",
+									"",
+									"// Set the Service ID",
+									"postman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints",
 						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"endpoint\": {\r\n        \"interface\": \"{{endpoint_interface}}\",\r\n        \"region_id\": \"{{region_id}}\",\r\n        \"url\": \"{{endpoint_url}}\",\r\n        \"service_id\": \"{{service_id}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/endpoints",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"endpoints"
+							]
 						},
 						"description": "/v3/endpoints"
 					},
@@ -3284,23 +5000,33 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the SErvice ID\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+								"exec": [
+									"// Set the SErvice ID",
+									"postman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services/{{service_id}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services/{{service_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"services",
+								"{{service_id}}"
+							]
 						},
 						"description": "/v3/services/{service_id}"
 					},
@@ -3313,28 +5039,53 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the SErvice ID\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");\n\n// Set Service Type\npostman.setEnvironmentVariable(\"service_type\", \"SETME\");\n\n// Set Service Name\npostman.setEnvironmentVariable(\"service_name\", \"SETME\");\n\n// Set Service Description\npostman.setEnvironmentVariable(\"service_description\", \"SETME\");\n\n// Set Service Enabled\npostman.setEnvironmentVariable(\"service_enabled\", true);"
+								"exec": [
+									"// Set the SErvice ID",
+									"postman.setEnvironmentVariable(\"service_id\", \"SETME\");",
+									"",
+									"// Set Service Type",
+									"postman.setEnvironmentVariable(\"service_type\", \"SETME\");",
+									"",
+									"// Set Service Name",
+									"postman.setEnvironmentVariable(\"service_name\", \"SETME\");",
+									"",
+									"// Set Service Description",
+									"postman.setEnvironmentVariable(\"service_description\", \"SETME\");",
+									"",
+									"// Set Service Enabled",
+									"postman.setEnvironmentVariable(\"service_enabled\", true);"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services/{{service_id}}",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"service\": {\r\n        \"enabled\": {{service_enabled}},\r\n        \"type\": \"{{service_type}}\",\r\n        \"name\": \"{{service_name}}\",\r\n        \"description\": \"{{service_description}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services/{{service_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"services",
+								"{{service_id}}"
+							]
 						},
 						"description": "/v3/services/{service_id}"
 					},
@@ -3347,23 +5098,37 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the SErvice ID\npostman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+								"exec": [
+									"// Set the SErvice ID",
+									"postman.setEnvironmentVariable(\"service_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services/{{service_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/services/{{service_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"services",
+								"{{service_id}}"
+							]
 						},
 						"description": "/v3/services/{service_id}"
 					},
@@ -3373,7 +5138,6 @@
 		},
 		{
 			"name": "Users",
-			"description": "/v3/users",
 			"item": [
 				{
 					"name": "Show user details",
@@ -3382,23 +5146,33 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								"exec": [
+									"// Set User ID",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"users",
+								"{{user_id}}"
+							]
 						},
 						"description": "/v3/users/{user_id}"
 					},
@@ -3411,28 +5185,56 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\n// Set the User Name\npostman.setEnvironmentVariable(\"user_name\", \"SETME\");\n\n// Set the User Password\npostman.setEnvironmentVariable(\"user_password\", \"SETME\");\n\n// Set the User Enabled Status\npostman.setEnvironmentVariable(\"user_enabled\", true);\n\n// Set the User's Domain ID\npostman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\n// Set the User's Default Project ID\npostman.setEnvironmentVariable(\"default_project_id\", \"{{OS_TENANT_ID}}\");"
+								"exec": [
+									"// Set User ID",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"// Set the User Name",
+									"postman.setEnvironmentVariable(\"user_name\", \"SETME\");",
+									"",
+									"// Set the User Password",
+									"postman.setEnvironmentVariable(\"user_password\", \"SETME\");",
+									"",
+									"// Set the User Enabled Status",
+									"postman.setEnvironmentVariable(\"user_enabled\", true);",
+									"",
+									"// Set the User's Domain ID",
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");",
+									"",
+									"// Set the User's Default Project ID",
+									"postman.setEnvironmentVariable(\"default_project_id\", \"{{OS_TENANT_ID}}\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}",
 						"method": "PATCH",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"user\": {\r\n        \"default_project_id\": \"{{default_project_id}}\",\r\n        \"domain_id\": \"{{domain_id}}\",\r\n        \"enabled\": {{user_enabled}},\r\n        \"name\": \"{{user_name}}\",\r\n        \"password\": \"{{user_password}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"users",
+								"{{user_id}}"
+							]
 						},
 						"description": "/v3/users/{user_id}"
 					},
@@ -3445,23 +5247,37 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								"exec": [
+									"// Set User ID",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}",
 						"method": "DELETE",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"users",
+								"{{user_id}}"
+							]
 						},
 						"description": "/v3/users/{user_id}"
 					},
@@ -3474,23 +5290,34 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								"exec": [
+									"// Set User ID",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/groups",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/groups",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"users",
+								"{{user_id}}",
+								"groups"
+							]
 						},
 						"description": "/v3/users/{user_id}/groups"
 					},
@@ -3503,28 +5330,48 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");\n\n// Set the Old User Password\npostman.setEnvironmentVariable(\"old_password\", \"SETME\");\n\n// Set the New User Password\npostman.setEnvironmentVariable(\"new_password\", \"SETME\");"
+								"exec": [
+									"// Set the User ID",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");",
+									"",
+									"// Set the Old User Password",
+									"postman.setEnvironmentVariable(\"old_password\", \"SETME\");",
+									"",
+									"// Set the New User Password",
+									"postman.setEnvironmentVariable(\"new_password\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/password",
 						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"user\": {\r\n        \"password\": \"{{old_password}}\",\r\n        \"original_password\": \"{{new_password}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/password",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"users",
+								"{{user_id}}",
+								"password"
+							]
 						},
 						"description": "/v3/users/{user_id}/password"
 					},
@@ -3537,28 +5384,52 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set the User Name\npostman.setEnvironmentVariable(\"user_name\", \"SETME\");\n\n// Set the User Password\npostman.setEnvironmentVariable(\"user_password\", \"SETME\");\n\n// Set the User Enabled Status\npostman.setEnvironmentVariable(\"user_enabled\", true);\n\n// Set the User's Domain ID\npostman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");\n\n// Set the User's Default Project ID\npostman.setEnvironmentVariable(\"default_project_id\", \"{{OS_TENANT_ID}}\");"
+								"exec": [
+									"// Set the User Name",
+									"postman.setEnvironmentVariable(\"user_name\", \"SETME\");",
+									"",
+									"// Set the User Password",
+									"postman.setEnvironmentVariable(\"user_password\", \"SETME\");",
+									"",
+									"// Set the User Enabled Status",
+									"postman.setEnvironmentVariable(\"user_enabled\", true);",
+									"",
+									"// Set the User's Domain ID",
+									"postman.setEnvironmentVariable(\"domain_id\", \"{{OS_DOMAIN_ID}}\");",
+									"",
+									"// Set the User's Default Project ID",
+									"postman.setEnvironmentVariable(\"default_project_id\", \"{{OS_TENANT_ID}}\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users",
 						"method": "POST",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							},
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"user\": {\r\n        \"default_project_id\": \"{{default_project_id}}\",\r\n        \"domain_id\": \"{{domain_id}}\",\r\n        \"enabled\": {{user_enabled}},\r\n        \"name\": \"{{user_name}}\",\r\n        \"password\": \"{{user_password}}\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"users"
+							]
 						},
 						"description": "/v3/users"
 					},
@@ -3567,18 +5438,24 @@
 				{
 					"name": "List users",
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"users"
+							]
 						},
 						"description": "/v3/users"
 					},
@@ -3591,29 +5468,41 @@
 							"listen": "prerequest",
 							"script": {
 								"type": "text/javascript",
-								"exec": "// Set User ID\npostman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								"exec": [
+									"// Set User ID",
+									"postman.setEnvironmentVariable(\"user_id\", \"SETME\");"
+								]
 							}
 						}
 					],
 					"request": {
-						"url": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/projects",
 						"method": "GET",
 						"header": [
 							{
 								"key": "X-Auth-Token",
-								"value": "{{TOKEN}}",
-								"description": ""
+								"value": "{{TOKEN}}"
 							}
 						],
-						"body": {
-							"mode": "formdata",
-							"formdata": []
+						"url": {
+							"raw": "http://{{IP}}:{{KEYSTONE_PORT}}/v3/users/{{user_id}}/projects",
+							"protocol": "http",
+							"host": [
+								"{{IP}}"
+							],
+							"port": "{{KEYSTONE_PORT}}",
+							"path": [
+								"v3",
+								"users",
+								"{{user_id}}",
+								"projects"
+							]
 						},
 						"description": "/v3/users/{user_id}/projects"
 					},
 					"response": []
 				}
-			]
+			],
+			"description": "/v3/users"
 		}
 	]
 }
